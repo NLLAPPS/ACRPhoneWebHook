@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ACR Phone Webhook</title>
+
+    <!--css-->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="lib/datatables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container hidden">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">ACR Phone Webhook</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Recordings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h1 class="page-header">Recordings</h1>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-responsive">
+                    <table id="recordings-table" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Note</th>
+                                <th>Date</th>
+                                <th>Size</th>
+                                <th>Duration</th>                  
+                            </tr>
+                        </thead>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--login modal-->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="login-modal-label">Login</h4>
+                </div>
+                <form id="login-form" autocomplete="off">
+                    <div class="modal-body">
+                        <div id="login-message" class="alert alert-danger text-center hidden" role="alert"></div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input id="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" class="form-control" type="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="login" type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--js-->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="lib/datatables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="site.js"></script>
+</body>
+</html>
