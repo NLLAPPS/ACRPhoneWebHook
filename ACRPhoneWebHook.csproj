@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="recordings.db" />
+    <None Remove="AppData\recordings.db" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
