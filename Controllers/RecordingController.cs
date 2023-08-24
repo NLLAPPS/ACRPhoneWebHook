@@ -95,6 +95,7 @@ namespace ACRPhone.Webhook.Controllers
 
      
         [HttpPost("upload")]
+        [RequestFormLimits(MultipartBodyLengthLimit = 1073741824)]
         public async Task<IActionResult> Upload([FromForm] UploadRecordViewModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.Secret) && model.Secret != Models.User.Secret)
