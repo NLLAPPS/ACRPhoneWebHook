@@ -8,8 +8,7 @@ namespace ACRPhone.Webhook.Authentication
 {
     public class CustomAuthHandler : AuthenticationHandler<CustomAuthOptions>
     {
-        public CustomAuthHandler(IOptionsMonitor<CustomAuthOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-            : base(options, logger, encoder, clock)
+        public CustomAuthHandler(IOptionsMonitor<CustomAuthOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)  : base(options, logger, encoder, clock)
         {
     
         }

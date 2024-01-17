@@ -1,0 +1,18 @@
+#
+#
+# To run call docker-compose -f acrphonewebhook -docker-compose.yml up -d
+#
+#
+
+name: nll-apps
+
+services:
+    acrphonewebhook:
+        restart: unless-stopped
+        container_name: acr-phone-webhook
+        image: 'acrphonewebhook:latest'
+        ports:
+            - '80:8080'
+
+
+           

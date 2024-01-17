@@ -4,6 +4,7 @@ using ACRPhone.Webhook.Authentication;
 using ACRPhone.Webhook.Models;
 using ACRPhone.Webhook.Repositories;
 using ACRPhone.Webhook.ViewModels;
+using ACRPhoneWebHook.Models;
 
 
 namespace ACRPhone.Webhook.Controllers
@@ -16,18 +17,24 @@ namespace ACRPhone.Webhook.Controllers
 
         private readonly IRecordingRepository _recordingRepository;
 
-        public RecordingController(ILogger<RecordingController> logger, IRecordingRepository recordingRepository)
+        private readonly AppSettings.AppSettings _appSettings;
+
+        public RecordingController(ILogger<RecordingController> logger, IRecordingRepository recordingRepository, AppSettings.AppSettings appSettings)
         {
             _logger = logger;
 
             _recordingRepository = recordingRepository;
+
+            _appSettings = appSettings;
         }
 
-        [Authorize(AuthenticationSchemes  = CustomAuthOptions.DefaultScheme)]
+        [Authorize(AuthenticationSchemes = CustomAuthOptions.DefaultScheme)]
         [HttpPost("all")]
-        public IEnumerable<Recording> GetAll()
+        public IEnumerable<RecordingFormatted> GetAll()
         {
-            return _recordingRepository.GetAll();
+            var items = _recordingRepository.GetAll();
+            return items.Select(item => item.asFormattedRecording());
+
         }
 
         [HttpGet("{id}", Name = "GetRecording")]
@@ -93,12 +100,12 @@ namespace ACRPhone.Webhook.Controllers
             return new NoContentResult();
         }
 
-     
+
         [HttpPost("upload")]
-        [RequestFormLimits(MultipartBodyLengthLimit = 1073741824)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 2147483647)]
         public async Task<IActionResult> Upload([FromForm] UploadRecordViewModel model)
         {
-            if (!string.IsNullOrWhiteSpace(model.Secret) && model.Secret != Models.User.Secret)
+            if (!string.IsNullOrWhiteSpace(model.Secret) && model.Secret != _appSettings.UserCredentials.Secret)
             {
                 return StatusCode(401, "User with specified secret " + model.Secret + " doesn't exist");
             }
@@ -128,10 +135,10 @@ namespace ACRPhone.Webhook.Controllers
                 {
                     Source = model.Source,
                     FileName = safeFileName,
-                    Note = model.Note,
-                    Date = model.Date,
+                    Note = model.Note ?? "",
+                    Date = model.Date ?? DateTimeOffset.Now.ToUnixTimeSeconds(),
                     FileSize = length,
-                    Duration = model.Duration,
+                    Duration = model.Duration ?? 0,
                 };
 
                 _recordingRepository.Add(recording);

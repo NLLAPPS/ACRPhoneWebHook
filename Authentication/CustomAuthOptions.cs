@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿
 using Microsoft.AspNetCore.Authentication;
 
 namespace ACRPhone.Webhook.Authentication

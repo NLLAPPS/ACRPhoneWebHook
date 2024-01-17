@@ -15,9 +15,28 @@
                 },
                 "dataSrc": ""
             },
+            "columnDefs": [
+                {
+                    //1 is the second row which we put fiel name in the html table  https://datatables.net/reference/option/columnDefs.targets
+                    targets: 1,
+                    render: function (data, type, row, meta) {
+                        if (type === 'display') {
+                            return $('<a>')
+                                .attr('href', '/uploads/'+ data)
+                                .text(data)
+                                .wrap('<div></div>')
+                                .parent()
+                                .html();
+
+                        } else {
+                            return data;
+                        }
+                    }
+                }
+            ],
             "columns": [
                 { "data": "id" },
-                { "data": "fileName" },
+                { "data": "fileName", },
                 { "data": "note" },
                 { "data": "date" },
                 { "data": "fileSize" },
